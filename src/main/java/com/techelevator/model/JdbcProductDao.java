@@ -22,11 +22,12 @@ public class JdbcProductDao implements ProductDao {
 	@Override
 	public List<Product> getAllProducts() {
 		ArrayList<Product> allProducts = new ArrayList<>();
-		String sqlSelectAllProducts="SELECT * FROM product";
+		String sqlSelectAllProducts="SELECT * FROM products";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet( sqlSelectAllProducts);
 		while(results.next()) {
 			Long id = results.getLong("id");
+			Long sellerId = results.getLong("sellerId");
 			String category = results.getString("category");
 			String condition = results.getString("condition");
 			String color = results.getString("color");
@@ -34,7 +35,7 @@ public class JdbcProductDao implements ProductDao {
 			double price = results.getDouble("price");
 			String imgUrl = results.getString("imgUrl");
 			
-			allProducts.add(new Product(id, category, condition, color, size, price, imgUrl));
+			allProducts.add(new Product(id, sellerId, category, condition, color, size, price, imgUrl));
 		}
 		return allProducts;
 	}
@@ -42,8 +43,8 @@ public class JdbcProductDao implements ProductDao {
 	@Override
 	public void save(Product product) {
 		Long id = getNextId();
-		String sqlInsertPost = "INSERT INTO product(id, category, condition, color, size, price, imgUrl ) VALUES (?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sqlInsertPost, id, product.getCategory(), product.getCondition(), product.getColor(), product.getSize(), product.getPrice(), product.getImgUrl());
+		String sqlInsertPost = "INSERT INTO products(id, sellerId, category, condition, color, size, price, imgUrl ) VALUES (?,?,?,?,?,?,?,?)";
+		jdbcTemplate.update(sqlInsertPost, id, 1L/*product.getSellerId()*/, product.getCategory(), product.getCondition(), product.getColor(), product.getSize(), product.getPrice(), product.getImgUrl());
 	}
 
 	private Long getNextId() {

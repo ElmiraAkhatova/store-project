@@ -1,30 +1,17 @@
 package com.techelevator.model;
 
 public class User {
-	private long userId;
-	private String userName;
-	private String password;
+	private long id;
 	private String firstName;
 	private String lastName;
-	private String salt;
+	private String userName;
+	private String password;
 	
-	public long getUserId() {
-		return userId;
+	public long getId() {
+		return id;
 	}
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -38,12 +25,16 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getSalt() {
-		return salt;
+	public String getUserName() {
+		return userName;
 	}
-	public void setSalt(String salt) {
-		this.salt = salt;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	
-
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
