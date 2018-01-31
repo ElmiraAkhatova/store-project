@@ -92,15 +92,5 @@ public class HomeController {
 	public String showBuyPage(ModelMap map) {
 		return "BuyPage";
 	}
-	
-	//unrelated practice, delete later
-	private int getLargestNum(int[] nums){
-		int largestnum = nums[0];
-		for(int n : nums){
-			if(n > largestnum && n % 2 == 0){
-				largestnum = n;
-			};
-		}
-		return largestnum;
-	}
+
 }

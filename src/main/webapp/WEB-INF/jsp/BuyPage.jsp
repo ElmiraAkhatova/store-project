@@ -41,27 +41,3 @@
 		</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- 			<table>
-				<tr>
-				<th>Make</tr>
-				<th>Model</th>
-				</tr>
-				<c:forEach var="car" items="${carList}">
-				<tr>
-				<td><c:out value="${car.make}" /></td>
-				<td><c:out value="${car.model}" /></td>
-				</tr>
-				</c:forEach>
-			</table> --%>
