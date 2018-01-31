@@ -4,10 +4,21 @@
 
 BEGIN;
 
--- CREATE statements go here
-
-CREATE TABLE product (
+--USER TABLE
+CREATE TABLE users (
 	id SERIAL primary key,
+	firstName VARCHAR,
+	lastName VARCHAR,
+	userName VARCHAR,
+	password VARCHAR
+);
+
+CREATE SEQUENCE seq_user_id;
+
+--PRODUCT TABLE
+CREATE TABLE products (
+	id SERIAL primary key,
+	sellerId INTEGER REFERENCES users,
 	category VARCHAR,
 	condition VARCHAR,
 	color VARCHAR,

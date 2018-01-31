@@ -35,14 +35,27 @@ public class HomeController {
 		return "ProductList";
 	}
 	
-	@RequestMapping(path = { "/register" }, method = RequestMethod.GET)
-	public String showRegisterPage(ModelMap map) {
-		return "register";
+	@RequestMapping(path = { "/login" }, method = RequestMethod.GET)
+	public String showLoginPage(ModelMap map) {
+		return "login";
 	}
+	
+	@RequestMapping(path = { "/login" }, method = RequestMethod.POST)
+	public String processLogin(User user, ModelMap map) {
+		System.out.println("On user method...");
+		System.out.println(user.getUserName());
+		return "login";
+	}
+	
 	
 	@RequestMapping(path = { "/addProduct" }, method = RequestMethod.GET)
 	public String showProductPage(ModelMap map) {
 		return "AddProduct";
+	}
+	
+	@RequestMapping(path = { "/register" }, method = RequestMethod.GET)
+	public String showRegisterPage(ModelMap map) {
+		return "register";
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)

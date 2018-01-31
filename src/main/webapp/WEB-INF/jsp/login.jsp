@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-
 <script type="text/javascript">
 	$(document).ready(function () {
 	
@@ -26,11 +25,11 @@
 </script>
 
 <div>
-<h1>Welcome to Restaurant Picker</h1>
-<p>Sometimes the toughest decision is "Where are we going to eat?" Behold the amazing benefits of using Restaurant Picker and why you should sign up immediately!</p>
+<h1>Welcome to the clothing store!</h1>
+<p>Please login:</p>
 </div>
 <div>
-	<c:url var="formAction" value="/" />
+	<c:url var="formAction" value="/login" />
 	<form method="POST" action="${formAction}">
 		<div>
 			<label for="userName">User Name: </label> <input type="text"
