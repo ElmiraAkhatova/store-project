@@ -1,7 +1,0 @@
-com\techelevator\HomeController.class
-com\techelevator\model\Size.class
-com\techelevator\model\Category.class
-com\techelevator\model\Product.class
-com\techelevator\model\ProductDao.class
-com\techelevator\model\User.class
-com\techelevator\model\JdbcProductDao.class
