@@ -3,6 +3,9 @@
 <!DOCTYPE html >
 <html>
 <head>
+
+<c:import url="/WEB-INF/jsp/header.jsp" />
+
 <c:url var="cssHref" value="/css/site.css" />
 <link type="text/css" rel="stylesheet" href="${cssHref}" />
 <title>My project</title>
