@@ -56,12 +56,8 @@ public class HomeController {
 	
 	@RequestMapping(path = { "/login" }, method = RequestMethod.POST)
 	public String processLogin(User logInAttemptUser, ModelMap model,  HttpSession session) {
-		System.out.println("On user method...");
-		System.out.println(logInAttemptUser.getUserName());
 		
-		//Get all users
 		List<User> users = userDao.getAllUsers();
-		System.out.println("Got users, count is: " + users.size());
 		
 		boolean areValidCredentials = AreCredentialsValid(logInAttemptUser.getUserName(), logInAttemptUser.getPassword(), users);
 		
@@ -82,10 +78,14 @@ public class HomeController {
 		return "ProductList";
 	}
 	
-	
-	@RequestMapping(path = { "/addProduct" }, method = RequestMethod.GET)
-	public String showProductPage(ModelMap map) {
-		return "AddProduct";
+	@RequestMapping(path = "/addProduct", method = RequestMethod.GET)
+	public String showProductPage(ModelMap map, HttpSession session) {
+		User currentUser = (User) session.getAttribute("user");
+		if (currentUser != null) {
+			return "AddProduct";
+		} else {
+			return "redirect:/login";
+		}
 	}
 	
 	@RequestMapping(path = "/addProduct", method = RequestMethod.POST)
