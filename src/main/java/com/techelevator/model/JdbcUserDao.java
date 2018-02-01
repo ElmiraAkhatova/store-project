@@ -26,6 +26,24 @@ public class JdbcUserDao implements UserDao {
 		String sqlInsertPost = "INSERT INTO users(id, firstName, lastName, userName, password) VALUES (?,?,?,?,?)";
 		jdbcTemplate.update(sqlInsertPost, id, user.getFirstName(), user.getLastName(), user.getUserName(), user.getPassword());
 	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		ArrayList<User> allUsers = new ArrayList<>();
+		String sqlSelectAllUsers="SELECT * FROM users";
+		
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectAllUsers);
+		while(results.next()) {		
+			Long id = results.getLong("id");
+			String firstName = results.getString("firstName");
+			String lastName = results.getString("lastName");
+			String userName = results.getString("userName");
+			String password = results.getString("password");
+			
+			allUsers.add(new User(id, firstName, lastName, userName, password));
+		}
+		return allUsers;
+	}
 
 	private Long getNextId() {
 		String sqlSelectNextId = "SELECT NEXTVAL('seq_user_id')";

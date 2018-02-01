@@ -67,10 +67,21 @@ body {
   <div class="header-left">
     <a class="active" href="#addProduct">&nbspSell &nbsp</a>
     </div>
-  <div class="header-right">
-    <a  href="/m3-individual-project/login">Login</a>
-    <a href="/m3-individual-project/register">Sign Up</a>
-  </div>
+    
+   <c:if test="${not empty user}">   
+  	<div class="header-right">
+	    <span>${user.firstName}</span>
+	    <a href="/m3-individual-project/logout">Logout</a>
+  	</div>
+   </c:if>
+   
+   <c:if test="${empty user}">   
+	  <div class="header-right">
+	    <a href="/m3-individual-project/login">Login</a>
+	    <a href="/m3-individual-project/register">Sign Up</a>
+	  </div>
+   </c:if>
+   
 </div>
 
 

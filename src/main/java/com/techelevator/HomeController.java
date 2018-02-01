@@ -3,6 +3,8 @@ package com.techelevator;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +18,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDao;
 
 @Controller
-@SessionAttributes("producsApp")
+@SessionAttributes("user")
 public class HomeController {
 
 	private ProductDao productDao;
@@ -40,11 +42,44 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping(path = { "/logout" }, method = RequestMethod.GET)
+	public String logUserOut(ModelMap model,  HttpSession session) {
+		
+		session.removeAttribute("user");	
+		model.remove("user");
+		
+		List<Product> products = productDao.getAllProducts();
+		model.put("products", products);
+		
+		return "ProductList";
+	}
+	
 	@RequestMapping(path = { "/login" }, method = RequestMethod.POST)
-	public String processLogin(User user, ModelMap map) {
+	public String processLogin(User logInAttemptUser, ModelMap model,  HttpSession session) {
 		System.out.println("On user method...");
-		System.out.println(user.getUserName());
-		return "login";
+		System.out.println(logInAttemptUser.getUserName());
+		
+		//Get all users
+		List<User> users = userDao.getAllUsers();
+		System.out.println("Got users, count is: " + users.size());
+		
+		boolean areValidCredentials = AreCredentialsValid(logInAttemptUser.getUserName(), logInAttemptUser.getPassword(), users);
+		
+		if(areValidCredentials) {
+			User loggedInUser = GetUserFromListByNameAndPassword(logInAttemptUser.getUserName(), 
+																 logInAttemptUser.getPassword(), 
+																 users);
+			model.put("user", loggedInUser);
+			session.setAttribute("user", loggedInUser);
+		} else {
+			model.put("error", "Invalid username/password combination");
+		}
+		
+		
+		List<Product> products = productDao.getAllProducts();
+		model.put("products", products);
+		
+		return "ProductList";
 	}
 	
 	
@@ -92,5 +127,33 @@ public class HomeController {
 	public String showBuyPage(ModelMap map) {
 		return "BuyPage";
 	}
+	
+	private boolean AreCredentialsValid(String enteredUserName, 
+									  	String enteredPassword, 
+									    List<User> users) {
+		boolean areCredentialsValid = false;
+		for(User user : users) {
+			if(user.getFirstName().equals(enteredUserName) 
+					&& user.getPassword().equals(enteredPassword)) {
+				areCredentialsValid = true;
+			}
+		}
+		
+		return areCredentialsValid;
+	}
+	
+	private User GetUserFromListByNameAndPassword(String enteredUserName, 
+										  		  String enteredPassword, 
+										  		  List<User> usersFromDb) {
+	User user = new User();
+	for(User dbUser : usersFromDb) {
+		if(dbUser.getFirstName().equals(enteredUserName) 
+		&& dbUser.getPassword().equals(enteredPassword)) {
+			user = dbUser;
+		}
+	}
 
+	return user;
+	
+	}
 }
