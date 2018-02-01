@@ -16,8 +16,8 @@
 	<c:url var="formAction" value="/addProduct" />
 	<form method="POST" action="${formAction}">
 		<div class="formInputGroup">
-			<label for="username">User Name:</label> <input type="text"
-				name="username" id="username" />
+			<label for="title">Description/Title:</label> <input type="text"
+				name="title" id="title" />
 		</div>
 
 		<div class="formInputGroup">

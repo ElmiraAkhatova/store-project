@@ -88,6 +88,17 @@ public class HomeController {
 		return "AddProduct";
 	}
 	
+	@RequestMapping(path = "/addProduct", method = RequestMethod.POST)
+	public String processAddProduct(Product product, ModelMap model) {
+		
+		productDao.save(product);
+
+		List<Product> products = productDao.getAllProducts();
+		model.put("products", products);
+
+		return "/ProductList";
+	}
+	
 	@RequestMapping(path = { "/register" }, method = RequestMethod.GET)
 	public String showRegisterPage(ModelMap map) {
 		return "register";
@@ -104,16 +115,7 @@ public class HomeController {
 		return "ProductList";
 	}
 
-	@RequestMapping(path = "/addProduct", method = RequestMethod.POST)
-	public String processAddProduct(Product product, ModelMap map) {
-		
-		productDao.save(product);
-
-		List<Product> products = productDao.getAllProducts();
-		map.put("products", products);
-
-		return "/ProductList";
-	}
+	
 	
 	@RequestMapping(path = "/productList", method = RequestMethod.GET)
 	public String displayProductList(ModelMap map) {

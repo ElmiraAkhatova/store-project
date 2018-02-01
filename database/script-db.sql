@@ -15,6 +15,7 @@ CREATE SEQUENCE seq_user_id;
 CREATE TABLE products (
 	id SERIAL primary key,
 	sellerId INTEGER REFERENCES users,
+	title VARCHAR,
 	category VARCHAR,
 	condition VARCHAR,
 	color VARCHAR,
@@ -30,5 +31,5 @@ INSERT INTO users(id, firstName, lastName, userName, password)
 VALUES(1, 'John', 'Smith', 'test', 'test'); 
 
 --CREATE TEST PRODUCT
-INSERT INTO products(id, sellerId, category, condition, color, size, price, imgUrl ) 
-VALUES('1', '1', 'dress', 'new', 'green', 'S', '59.99', 'https://i.pinimg.com/736x/74/6c/6a/746c6a24c8210317f7b43eb0b74f3962--rockabilly-dresses-s-dresses.jpg');
+INSERT INTO products(id, sellerId, title, category, condition, color, size, price, imgUrl ) 
+VALUES('1', '1', 'MK night dress', 'dress', 'new', 'green', 'S', '59.99', 'https://i.pinimg.com/736x/74/6c/6a/746c6a24c8210317f7b43eb0b74f3962--rockabilly-dresses-s-dresses.jpg');

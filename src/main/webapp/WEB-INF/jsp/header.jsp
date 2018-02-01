@@ -63,9 +63,9 @@ body {
 <body>
 
 <div class="header">
-  <a href="#default" class="logo" style="color:#cc00cc;">Fashion Market</a>
+  <a href="/m3-individual-project" class="logo" style="color:#cc00cc;">Fashion Market</a>
   <div class="header-left">
-    <a class="active" href="#addProduct">&nbspSell &nbsp</a>
+    <a class="active" href="/m3-individual-project/addProduct">&nbspSell &nbsp</a>
     </div>
     
    <c:if test="${not empty user}">   

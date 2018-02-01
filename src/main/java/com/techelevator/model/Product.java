@@ -3,10 +3,11 @@ package com.techelevator.model;
 public class Product {
 	
 	public Product() {};
-  public Product(Long id, Long sellerId, String category, String condition, String color, String size, double price,
+  public Product(Long id, Long sellerId, String title, String category, String condition, String color, String size, double price,
 			String imgUrl) {
 		this.id = id;
 		this.sellerId = sellerId;
+		this.title = title;
 		this.category = category;
 		this.condition = condition;
 		this.color = color;
@@ -16,6 +17,7 @@ public class Product {
 	}
 public Long id;
   public Long sellerId;
+  public String title;
   public String category;
   public String condition;
   public String color;
@@ -33,6 +35,12 @@ public Long getSellerId() {
 }
 public void setSellerId(Long sellerId) {
 	this.sellerId = sellerId;
+}
+public String getTitle() {
+	return title;
+}
+public void setTitle(String title) {
+	this.title = title;
 }
 public String getCategory() {
 	return category;

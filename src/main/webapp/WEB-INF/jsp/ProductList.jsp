@@ -8,7 +8,6 @@
 </head>
 <body>
 	<h1>Welcome to the product list!</h1>
-	<a href="./addProduct">Add a Product</a>
 
 	<table>
 		<c:forEach var="i" begin="0" end="${products.size() - 1}">
@@ -18,6 +17,7 @@
 				</td>
 				<td>
 					<ul>
+						<li>${products[i].getTitle()}</li>
 						<li>${products[i].getCategory()}</li>
 						<li>${products[i].getCondition()}</li>
 						<li>${products[i].getColor()}</li>
