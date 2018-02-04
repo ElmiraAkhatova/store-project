@@ -22,21 +22,16 @@ public class JdbcProductDao implements ProductDao {
 	@Override
 	public List<Product> getAllProducts() {
 		ArrayList<Product> allProducts = new ArrayList<>();
+		
 		String sqlSelectAllProducts="SELECT * FROM products";
 		
 		SqlRowSet results = jdbcTemplate.queryForRowSet( sqlSelectAllProducts);
+		
 		while(results.next()) {
-			Long id = results.getLong("id");
-			Long sellerId = results.getLong("sellerId");
-			String title = results.getString("title");
-			String category = results.getString("category");
-			String condition = results.getString("condition");
-			String color = results.getString("color");
-			String size = results.getString("size");
-			double price = results.getDouble("price");
-			String imgUrl = results.getString("imgUrl");
 			
-			allProducts.add(new Product(id, sellerId, title, category, condition, color, size, price, imgUrl));
+			Product item = mapRowToProduct(results);
+			
+			allProducts.add(item);
 		}
 		return allProducts;
 	}
@@ -46,6 +41,35 @@ public class JdbcProductDao implements ProductDao {
 		Long id = getNextId();
 		String sqlInsertPost = "INSERT INTO products(id, sellerId, title, category, condition, color, size, price, imgUrl ) VALUES (?,?,?,?,?,?,?,?,?)";
 		jdbcTemplate.update(sqlInsertPost, id, 1L/*product.getSellerId()*/, product.getTitle(), product.getCategory(), product.getCondition(), product.getColor(), product.getSize(), product.getPrice(), product.getImgUrl());
+	}
+	
+	@Override
+	public Product getProductById(Long id) {
+		Product product = new Product();
+		
+		String sqlQuery = "SELECT * FROM products WHERE id=?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlQuery, id);
+		
+		if(results.next()) {
+			product = mapRowToProduct(results);
+		}
+		return product;
+	}
+	
+	private Product mapRowToProduct(SqlRowSet results) {
+		Product product;
+		Long productId = results.getLong("id");
+		Long sellerId = results.getLong("sellerId");
+		String title = results.getString("title");
+		String category = results.getString("category");
+		String condition = results.getString("condition");
+		String color = results.getString("color");
+		String size = results.getString("size");
+		double price = results.getDouble("price");
+		String imgUrl = results.getString("imgUrl");
+		
+		product = new Product(productId, sellerId, title, category, condition, color, size, price, imgUrl);
+		return product;
 	}
 
 	private Long getNextId() {
@@ -59,6 +83,8 @@ public class JdbcProductDao implements ProductDao {
 		}
 		return id;
 	}
+	
+
 	
 	
 }

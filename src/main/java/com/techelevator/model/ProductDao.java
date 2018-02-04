@@ -7,5 +7,7 @@ public interface ProductDao {
 	public List<Product> getAllProducts();
 
 	public void save(Product product);
+	
+	public Product getProductById(Long id);
 
 }

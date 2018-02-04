@@ -71,6 +71,7 @@ body {
    <c:if test="${not empty user}">   
   	<div class="header-right">
 	    <span>${user.userName}</span>
+	    <a href="/m3-individual-project/shoppingcart">Shopping Cart</a>
 	    <a href="/m3-individual-project/logout">Logout</a>
   	</div>
    </c:if>
