@@ -21,16 +21,13 @@
 						<li>${products[i].getColor()}</li>
 						<li>${products[i].getSize()}</li>
 						<li>${products[i].getPrice()}</li>
-						<li>quantity: <input type="number" value="0" id="quantity" />
-						</li>
-						<li><c:url var="doTransaction" value="/buy">
-								<c:param name="quantity" value="0"></c:param>
-								<c:param name="id" value="${products[i].id}"></c:param>
-							</c:url>
-
-							<form method="POST" action="${doTransaction}">
-								<input type="submit" value="BUY" />
-							</form></li>
+						<c:url var="formAction" value="/buy" />
+						<li><form action="${formAction}" id="form0" method="post">
+								<input id="id" name="id" type="hidden" value="${products[i].getId()}" />
+								<input id="quantity" name="quantity" type="number" value="0" /> 
+								<button>BUY</button>
+							</form>
+							</li>
 					</ul>
 				</td>
 			</tr>

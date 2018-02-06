@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.techelevator.model.Product;
 import com.techelevator.model.ProductDao;
+import com.techelevator.model.ShoppingCart;
+import com.techelevator.model.ShoppingCartItem;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDao;
 
@@ -57,25 +59,30 @@ public class ProductController {
 	public String buy(ModelMap model, HttpSession session, @RequestParam(required = false) String quantity,
 								    @RequestParam(required = false) String id) {
 		
+		//System.out.println("quantity:" +quantity);
 	   //created new cart or selected from session if user had cart
-	   List<Product> cart = new ArrayList<Product>();
+	   
+		//List<Product> cart = new ArrayList<Product>();
+		ShoppingCart shoppingCart = new ShoppingCart();
 		
-	   if(session.getAttribute("cart" ) != null) { 
-		cart = (List<Product>)session.getAttribute("cart");  
+	   if(session.getAttribute("shoppingCart") != null) { 
+		shoppingCart = (ShoppingCart)session.getAttribute("shoppingCart");  
 	   }
 	   
 	   Product item = productDao.getProductById(Long.parseLong(id));
 	   
-	   cart.add(item);
-	   session.setAttribute("cart", cart);
+	   shoppingCart.addToCart(item, Integer.parseInt(quantity));
 	   
-	   double totalPrice = 0;
+	   session.setAttribute("shoppingCart", shoppingCart);
 	   
-	   for(Product currentItem : cart) {
-		   totalPrice = currentItem.getPrice() + totalPrice;
-	   }
-	   	model.put("totalPrice", totalPrice);
-		model.put("cart", cart);
+//	   double totalPrice = 0;
+//	   
+//	   for(Product currentItem : cart) {
+//		   totalPrice = currentItem.getPrice() + totalPrice;
+//	   }
+//	   	model.put("totalPrice", totalPrice);
+	   
+		model.put("shoppingCart", shoppingCart);
 		
 		return "shoppingCart";
 	}

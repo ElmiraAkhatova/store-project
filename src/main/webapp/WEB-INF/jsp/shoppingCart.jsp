@@ -11,18 +11,18 @@
 <h2>My Shopping Cart!</h2>
 
 <table>
-		<c:forEach var="i" begin="0" end="${cart.size() - 1}">
+		<c:forEach var="i" begin="0" end="${shoppingCart.getItems().size() - 1}">
 			<tr>
-				<td><img width="50px" src="${cart[i].getImgUrl()}"></img></td>
+				<td><img width="50px" src="${shoppingCart.getItems()[i].getProduct().getImgUrl()}"></img></td>
 				<td>
 					<ul>
-						<li>${cart[i].getTitle()}</li>
-						<li>${cart[i].getCategory()}</li>
-						<li>${cart[i].getCondition()}</li>
-						<li>${cart[i].getColor()}</li>
-						<li>${cart[i].getSize()}</li>
-						<li>${cart[i].getPrice()}</li>
-			
+						<li>${shoppingCart.getItems()[i].getProduct().getTitle()}</li>
+						<li>${shoppingCart.getItems()[i].getProduct().getCategory()}</li>
+						<li>${shoppingCart.getItems()[i].getProduct().getCondition()}</li>
+						<li>${shoppingCart.getItems()[i].getProduct().getColor()}</li>
+						<li>${shoppingCart.getItems()[i].getProduct().getSize()}</li>
+						<li>${shoppingCart.getItems()[i].getProduct().getPrice()}</li>
+						<li>Quantity: ${shoppingCart.getItems()[i].getQuantity()}</li>
 						
 					</ul>
 				</td>
@@ -30,6 +30,6 @@
 		</c:forEach>
 	</table>
 	
-	<div>Total Price: $${totalPrice}</div>
+	<div class="subtotal">Total Price: $${shoppingCart.getSubTotal()}</div>
 </body>
 </html>
