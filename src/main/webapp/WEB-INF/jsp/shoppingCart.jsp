@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
+   
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +12,11 @@
 </head>
 <body>
 <h2>My Shopping Cart!</h2>
+
+<div class="header-right">
+	    <span>${user.userName}</span>
+	    <a href="/m3-individual-project/logout">Logout</a>
+   	</div> 
 
 <table>
 		<c:forEach var="i" begin="0" end="${shoppingCart.getItems().size() - 1}">
@@ -31,5 +39,6 @@
 	</table>
 	
 	<div class="subtotal">Total Price: $${shoppingCart.getSubTotal()}</div>
+	<a href="/m3-individual-project">Continue Shopping</a>
 </body>
 </html>

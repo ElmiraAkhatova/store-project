@@ -39,6 +39,7 @@ public class LoginController {
 	public String logUserOut(ModelMap model, HttpSession session) {
 
 		session.removeAttribute("user");
+		session.removeAttribute("shoppingCart");
 		model.remove("user");
 
 		List<Product> products = productDao.getAllProducts();
@@ -49,8 +50,9 @@ public class LoginController {
 
 	@RequestMapping(path = { "/login" }, method = RequestMethod.POST)
 	public String processLogin(User logInAttemptUser, ModelMap model, HttpSession session) {
-
+		
 		session.removeAttribute("user");
+		session.removeAttribute("shoppingCart");
 		model.remove("user");
 		
 		List<User> users = userDao.getAllUsers();
