@@ -101,5 +101,49 @@ public class ProductController {
 		return "BuyPage";
 	}
 	
+	@RequestMapping(path = { "/editItem" }, method = RequestMethod.POST)
+	public String showItemPage(ModelMap model, HttpSession session, @RequestParam(required = false) String id) {
+		
+		
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("shoppingCart");
+		ShoppingCartItem itemToEditInCart = cart.getItemByProductId(Long.parseLong(id));
+		model.put("itemToEditInCart", itemToEditInCart);
+		
+		return "editItem";
+	}
+	
+	@RequestMapping(path= {"/updateItem"}, method=RequestMethod.POST)
+	public String updateCart(ModelMap model, HttpSession session, @RequestParam(required = false) String id, @RequestParam int quantity) {
+
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("shoppingCart");
+
+		cart.updateItemQuantity(Long.parseLong(id), quantity);
+		session.setAttribute("shoppingCart", cart);
+		
+		model.put("shoppingCart", cart);		  
+		return "shoppingCart";
+	 }
+	
+	
+	@RequestMapping(path = {"/removeItem"}, method=RequestMethod.POST)
+	public String updateCart(ModelMap model, HttpSession session, @RequestParam String id) {
+		
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("shoppingCart");
+		
+		cart.removeItem(Long.parseLong(id));
+		
+		session.setAttribute("shoppingCart", cart);
+		model.put("shoppingCart", cart);
+		
+		return "shoppingCart";
+	}
 	
 }
+	
+	
+	
+	
+	
+	
+	
+	

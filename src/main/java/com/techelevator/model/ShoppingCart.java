@@ -10,6 +10,18 @@ public class ShoppingCart {
 	public List<ShoppingCartItem> getItems() {
 		return items;
 	}
+	
+	
+	public ShoppingCartItem getItemByProductId(Long productId) {
+		ShoppingCartItem matchingItem = new ShoppingCartItem();
+		for(ShoppingCartItem cartItem : this.items) {
+			if(cartItem.getProduct().getId() == productId) {
+				matchingItem = cartItem;
+			}
+		}
+		
+		return matchingItem;
+	}
 
 	public void setItems(List<ShoppingCartItem> items) {
 		this.items = items;
@@ -40,8 +52,7 @@ public class ShoppingCart {
 	}
 
     /**
-     *  Get the subtotal of all items in the shopping cart.
-     * @return
+     * Get the subtotal of all items in the shopping cart.
      */
 	public double getSubTotal() {
 		double subTotal = 0;
@@ -50,6 +61,25 @@ public class ShoppingCart {
 		}
 		return subTotal;
 	}
+	
+	//Update quantity for an item already in the shopping cart
+	public void updateItemQuantity(Long productId, int quantity) {
+		for(ShoppingCartItem item : items){
+			if(productId == item.getProduct().getId()) {
+				item.setQuantity(quantity);
+			}
+		}
+	}
 
+	//remove item from shopping cart
+	public void removeItem(Long productId) {
+		ShoppingCartItem itemToRemove = new ShoppingCartItem();
+		for(ShoppingCartItem item : items) {
+			if(item.getProduct().getId() == productId) {
+				itemToRemove=item;
+			}
+		}
+		items.remove(itemToRemove);
+	}
 }
 

@@ -31,7 +31,13 @@
 						<li>${shoppingCart.getItems()[i].getProduct().getSize()}</li>
 						<li>${shoppingCart.getItems()[i].getProduct().getPrice()}</li>
 						<li>Quantity: ${shoppingCart.getItems()[i].getQuantity()}</li>
-						
+						<c:url var="formAction" value="/editItem" />
+						<li>
+							<form action="${formAction}" id="form0" method="post">
+								<input id="id" name="id" type="hidden" value="${shoppingCart.getItems()[i].getProduct().getId()}" />
+								<button>Edit Item</button>
+							</form>
+						</li>
 					</ul>
 				</td>
 			</tr>
